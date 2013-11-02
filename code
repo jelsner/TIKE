@@ -1,0 +1,32 @@
+Preliminaries
+-------------
+Set working directory and load packages.
+```{r sessioninfo, message=FALSE}
+setwd("~/Dropbox/Tornadoes")
+require(MASS); require(RColorBrewer)
+require(ggplot2); require(rgdal)
+require(plyr); require(spatstat)
+require(maptools); require(ordinal)
+require(ggmap)
+```
+
+Tornado data
+------------
+From the Storm Prediction Center (SPC) http://www.spc.noaa.gov/gis/svrgis/
+```{r downloaddata, eval=FALSE}
+#tmp = download.file("http://www.spc.noaa.gov/gis/svrgis/zipped/tornado.zip", "tornado.zip", mode="wb")
+```
+
+Read the tornado data.
+```{r readdataintoR}
+# unzip("tornado.zip")
+Torn = readOGR(dsn = "tornado", layer = "tornado")
+```
+
+Length and width
+----------------
+Subset for F-scale greater than 0.
+```{r subsetYearFscale}
+Torn2 = subset(Torn, Torn$FSCALE > 0)
+Torn2.df = as.data.frame(Torn2)
+```

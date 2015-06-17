@@ -1,0 +1,1 @@
+Please download the code and files into a single directory, start an R session and set working directory to source files, then source(code)
